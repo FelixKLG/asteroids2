@@ -1,0 +1,30 @@
+[package]
+name = "asteroids"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bevy = { version = "0.12.1", features = ["dynamic_linking"] }
+bevy-inspector-egui = "0.21.0"
+bevy_rapier2d = { version = "0.23.0", features = [
+    "parallel",
+    "simd-stable",
+    "debug-render-2d",
+] }
+rand = "0.8.5"
+rand_core = { version = "0.6.4", features = ["std"] }
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
+[profile.release]
+debug = false
+opt-level = 3
+codegen-units = 1
+lto = true
+strip = true
