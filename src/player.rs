@@ -40,30 +40,20 @@ fn spawn(mut commands: Commands, asset_server: Res<AssetServer>) {
 }
 
 fn move_pos(
-    mut characters: Query<(
-        &mut KinematicCharacterController,
-        &Player,
-        With<RigidBody>,
-    )>,
+    mut characters: Query<(&mut Transform, &Player, With<RigidBody>)>,
     input: Res<Input<KeyCode>>,
     time: Res<Time>,
 ) {
     let movement_speed = 100.0 * time.delta_seconds();
 
     for (mut transform, _, _) in characters.iter_mut() {
-        let mut translation = match transform.translation {
-            Some(t) => t,
-            None => {
-                debug!("No translation found for player");
-                continue;
-            }
-        };
+        let translation = &mut transform.translation.x;
 
         if input.pressed(KeyCode::Left) {
-            translation.x -= movement_speed;
+            *translation -= movement_speed;
         }
         if input.pressed(KeyCode::Right) {
-            translation.x += movement_speed;
+            *translation += movement_speed;
         }
     }
 }
