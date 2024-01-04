@@ -1,11 +1,15 @@
-use bevy::{prelude::*, window::WindowResolution};
+use bevy::{prelude::*, utils::info, window::WindowResolution};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_rapier2d::prelude::*;
 
+use crate::{asteroids::Asteroid, bullet::Bullet};
+
 mod asteroids;
 mod bullet;
+mod collisions;
 mod player;
 mod setup;
+mod ttl;
 
 #[derive(Resource)]
 struct GameData {
@@ -46,7 +50,11 @@ fn main() {
         .add_plugins(WorldInspectorPlugin::new())
         .add_plugins(setup::SetupPlugin)
         .add_plugins(player::PlayerPlugin)
+        .add_plugins(bullet::BulletPlugin)
         .add_plugins(asteroids::AsteroidPlugin)
+        .add_plugins(ttl::TimeToLivePlugin)
+        .add_plugins(collisions::ColsPlugin)
+        // .add_systems(Update, event_cols)
         .init_resource::<GameData>()
         .run()
 }

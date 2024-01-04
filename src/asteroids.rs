@@ -7,12 +7,12 @@ pub struct AsteroidPlugin;
 
 impl Plugin for AsteroidPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Update, spawn_asteroids);
+        app.add_systems(Update, (spawn_asteroids, oob_kill));
     }
 }
 
 #[derive(Component)]
-struct Asteroid;
+pub struct Asteroid;
 
 fn spawn_asteroids(
     mut commands: Commands,
@@ -57,8 +57,22 @@ fn spawn_asteroids(
             .insert(RigidBody::Dynamic)
             .insert(GravityScale(gravity_scale))
             .insert(Velocity::linear(Vec2::new(0.0, negative_y_velocity)))
+            .insert(ActiveEvents::COLLISION_EVENTS)
             .insert(Name::from("Asteroid"));
 
         game_data.asteroids += 1;
+    }
+}
+
+fn oob_kill(
+    mut commands: Commands,
+    mut asteroids: Query<(Entity, &Transform), With<Asteroid>>,
+    mut game_data: ResMut<GameData>,
+) {
+    for (asteroid, transform) in asteroids.iter_mut() {
+        if transform.translation.y < -500.0 {
+            commands.entity(asteroid).despawn();
+            game_data.asteroids -= 1;
+        }
     }
 }

@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use bevy_rapier2d::{prelude::*, rapier::dynamics::RigidBodyPosition};
+use bevy_rapier2d::prelude::*;
 
 pub struct PlayerPlugin;
 
@@ -11,7 +11,7 @@ impl Plugin for PlayerPlugin {
 }
 
 #[derive(Component)]
-struct Player;
+pub struct Player;
 
 fn spawn(mut commands: Commands, asset_server: Res<AssetServer>) {
     let texture = asset_server.load("Rocket.png");
