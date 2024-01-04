@@ -50,8 +50,8 @@ fn main() {
         .add_plugins(collisions::ColsPlugin)
         .add_systems(Update, (game_over, game_won))
         // TODO: REMOVE THESE BEFORE RELEASE BUILD!
-        .add_plugins(RapierDebugRenderPlugin::default())
-        .add_plugins(WorldInspectorPlugin::new())
+        // .add_plugins(RapierDebugRenderPlugin::default())
+        // .add_plugins(WorldInspectorPlugin::new())
         .init_resource::<GameData>()
         .run();
 }
