@@ -1,5 +1,5 @@
 use bevy::{app::AppExit, prelude::*, window::WindowResolution};
-use bevy_inspector_egui::quick::WorldInspectorPlugin;
+// use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_rapier2d::prelude::*;
 
 mod asteroids;
