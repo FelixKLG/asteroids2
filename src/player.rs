@@ -44,7 +44,7 @@ fn move_pos(
     input: Res<Input<KeyCode>>,
     time: Res<Time>,
 ) {
-    let movement_speed = 100.0 * time.delta_seconds();
+    let movement_speed = 200.0 * time.delta_seconds();
 
     for (mut transform, _, _) in characters.iter_mut() {
         let translation = &mut transform.translation.x;

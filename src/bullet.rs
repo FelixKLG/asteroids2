@@ -48,19 +48,8 @@ fn shoot(
                 )))
                 .insert(ActiveEvents::COLLISION_EVENTS)
                 .insert(Collider::ball(15.0))
+                .insert(Velocity::linear(Vec2::new(0.0, 300.)))
                 .insert(RigidBody::Dynamic);
         }
     }
-
-    // commands
-    //     .spawn(SpriteBundle {
-    //         material: materials.add(Color::rgb(0.7, 0.7, 0.7).into()),
-    //         sprite: Sprite::new(Vec2::new(10., 10.)),
-    //         ..Default::default()
-    //     })
-    //     .insert(Bullet)
-    //     .insert(RigidBody::Dynamic)
-    //     .insert(Collider::ball(5.0))
-    //     .insert(Velocity::linear(Vec2::new(0.0, 100.0)))
-    //     .insert(Name::from("Bullet"));
 }
